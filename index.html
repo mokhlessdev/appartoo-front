@@ -55,7 +55,7 @@
 
     </head>
 
-    <body class="no-skin" ng-app="Marsupilami" ng-controller="Marsupilami" >
+    <body class="no-skin" ng-app="Marsupilami" ng-controller="Marsupilami" ng-init="showLoginForm = true;showRegisterForm = false" >
         <div id="navbar" class="navbar navbar-default          ace-save-state">
             <div class="navbar-container ace-save-state" id="navbar-container">
                 <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -105,36 +105,76 @@
 
 
                                 <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
                                         <!-- register form -->
-                                        <div class="main-login main-center" ng-show="token == ''">
-                                            <form class="form-horizontal" method="post" action="#">
+                                        <div class="main-login main-center" ng-show="showRegisterForm == true" >
+                                            <form class="form-horizontal" ng-submit="register()" method="post" action="#">
                                                 <div class="form-group">
-                                                    <label for="username" class="cols-sm-2 control-label">Username</label>
+                                                    <label for="username" class="cols-sm-2 control-label">Identifiant</label>
                                                     <div class="cols-sm-10">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                                            <input type="text" class="form-control" ng-model="registerUser.username"  placeholder="Enter your Username"/>
+                                                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                            <input type="text" class="form-control" ng-model="registerUser.username"  placeholder="Saisir votre Identifiant"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+  <div class="form-group">
+                                                    <label for="username" class="cols-sm-2 control-label">Race</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                           <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                            <input type="text" class="form-control" ng-model="registerUser.race"  placeholder="Saisir votre race"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+<div class="form-group">
+                                                    <label for="username" class="cols-sm-2 control-label">Nourriture</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                            <input type="text" class="form-control" ng-model="registerUser.nourriture"  placeholder="Saisir votre nourriture"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+
+
+                                                  <div class="form-group">
+                                                    <label for="famille" class="cols-sm-2 control-label">Famille</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                       <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                            <input type="text" class="form-control" ng-model="registerUser.famille"  placeholder="Saisir votre famille"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+     <div class="form-group">
+                                                    <label for="famille" class="cols-sm-2 control-label">Age</label>
+                                                    <div class="cols-sm-10">
+                                                        <div class="input-group">
+                                                          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                            <input type="number" class="form-control" ng-model="registerUser.age"  placeholder="saisir votre age"/>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                                                    <label for="email" class="cols-sm-2 control-label"> Email</label>
                                                     <div class="cols-sm-10">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                                            <input type="text" class="form-control" name="email" id="email" ng-model="registerUser.email" placeholder="Enter your Email"/>
+                                                            <input type="text" class="form-control" name="email" id="email" ng-model="registerUser.email" placeholder="Saisir votre email"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                                                    <label for="password" class="cols-sm-2 control-label">Mot de passe</label>
                                                     <div class="cols-sm-10">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                            <input type="password" class="form-control" name="password" id="password" ng-model="registerUser.plainPassword.first" placeholder="Enter your Password"/>
+                                                            <input type="password" class="form-control" name="password" id="password" ng-model="registerUser.plainPassword.first" placeholder="Saisir votre mot de passe"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -148,18 +188,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <button type="button" ng-click="register()" class="btn btn-primary btn-lg btn-block login-button">Register</button>
-                                                </div>
-                                                <div class="login-register">
-                                                    <a href="index.php">Login</a>
+                                                    <button type="button" ng-click="register()" class="btn btn-primary btn-lg btn-block login-button">S'inscrire</button>
                                                 </div>
                                             </form>
                                         </div>
                                         <!-- end register -->
-                                    </div>
-                                    <div class="col-md-1"></div>  
-                                    <div class="col-md-5">
-                                        <div class="main-login main-center" ng-show="token == ''">
+                                  
+                                 
+
+                                        <div class="main-login main-center" ng-show="showLoginForm == true">
                                             <form class="form-horizontal" method="post" action="#">
                                                 <div class="form-group">
                                                     <label for="username" class="cols-sm-2 control-label">Username</label>
@@ -183,11 +220,13 @@
                                                     <button type="button" ng-click="login()" class="btn btn-primary btn-lg btn-block login-button">Login</button>
                                                 </div>
                                                 <div class="login-register">
-                                                    <a href="index.php">Register</a>
+                                                   
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="col-md-1"></div>  
+                                        <div class="col-md-4"></div> 
+                                        <button ng-show="showLoginForm == true" class="btn btn-primary" ng-click="showRegisterForm = true;showLoginForm = false">Creer un compte</button>
+                                        <button ng-show="showRegisterForm == true" class="btn btn-primary"  ng-click="showLoginForm = true;showRegisterForm = false">Vous avez deja un compte  </button>
                                     </div>
                                     <div class="hr dotted"></div>
                                     <div id="user-profile-2" ng-show="token != ''" class="user-profile">
@@ -528,35 +567,50 @@
                                                                     <div class="profile-info-name"> Identifiant </div>
 
                                                                     <div class="profile-info-value">
-                                                                        <input type="text" class="middle" ng-value="editUser.username" ng-init="editUser.username = user.username">
+                                                                        <input type="text" class="middle" ng-model="editUser.username">
+                                                                    </div>
+                                                                </div>
+                                                                  <div class="profile-info-row">
+                                                                    <div class="profile-info-name"> Email </div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <input type="text" class="middle" ng-model="editUser.email">
                                                                     </div>
                                                                 </div>
                                                                 <div class="profile-info-row">
                                                                     <div class="profile-info-name"> Age </div>
 
                                                                     <div class="profile-info-value">
-                                                                        <input type="text" class="middle" ng-value="editUser.age" ng-init="editUser.age = user.age">
+                                                                        <input type="text" class="middle" ng-model="editUser.age">
                                                                     </div>
                                                                 </div>
                                                                 <div class="profile-info-row">
                                                                     <div class="profile-info-name"> Famille </div>
 
                                                                     <div class="profile-info-value">
-                                                                        <input type="text" class="middle" ng-value="editUser.username" ng-init="editUser.famille = user.famille">
+                                                                        <input type="text" class="middle" ng-model="editUser.username">
                                                                     </div>
                                                                 </div>
                                                                 <div class="profile-info-row">
                                                                     <div class="profile-info-name"> Race </div>
 
                                                                     <div class="profile-info-value">
-                                                                        <input type="text" class="middle" ng-value="editUser.race" ng-init="editUser.race = user.username">
+                                                                        <input type="text" class="middle" ng-model="editUser.race">
                                                                     </div>
                                                                 </div>
                                                                 <div class="profile-info-row">
                                                                     <div class="profile-info-name">Nourriture </div>
 
                                                                     <div class="profile-info-value">
-                                                                        <input type="text" class="middle" ng-value="editUser.nourriture" ng-init="editUser.nourriture = user.username">
+                                                                        <input type="text" class="middle" ng-model="editUser.nourriture">
+                                                                    </div>
+                                                                </div>
+
+   <div class="profile-info-row">
+                                                                    <div class="profile-info-name">current_password </div>
+
+                                                                    <div class="profile-info-value">
+                                                                        <input type="text" class="middle" ng-model="editUser.current_password">
                                                                     </div>
                                                                 </div>
 

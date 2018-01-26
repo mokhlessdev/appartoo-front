@@ -40,7 +40,6 @@ app.controller('Marsupilami', function ($scope, $resource) {
             'id': id
         },
         function (data) {
-            console.log(data);
             $scope.getuser();
         },
                 function (error) {
@@ -48,7 +47,6 @@ app.controller('Marsupilami', function ($scope, $resource) {
     };
 
     $scope.invit = function () {
-  console.log($scope.invitation);
         var token = "Bearer " + $scope.token;
         var url = "http://localhost/appartoo-back/web/app_dev.php/invit";
         var postaction = $resource(url, null, {
@@ -64,13 +62,13 @@ app.controller('Marsupilami', function ($scope, $resource) {
             'email': $scope.invitation
         },
         function (data) {
-        alert(data.message)
-
+            alert(data.message)
+            $scope.getuser();
 
         },
                 function (error) {
                 });
-        
+
     };
 
 
@@ -80,7 +78,6 @@ app.controller('Marsupilami', function ($scope, $resource) {
     {
         var url = "http://localhost/appartoo-back/web/app_dev.php/login";
         $scope.data = $scope.userlogin;
-        console.log($scope.userlogin);
         var postaction = $resource(url, null,
                 {
                     'post': {method: 'POST'}
@@ -89,11 +86,14 @@ app.controller('Marsupilami', function ($scope, $resource) {
                 function (data) {
                     var tokenn = data.token;
                     $scope.token = data.token;
-
+                    if (data.token)
+                    {
+                        $scope.showLoginForm = false;
+                        $scope.showRegisterForm = false;
+                    }
                     $scope.getuser(data.token);
                 },
                 function (error) {
-                    console.log("error");
                 });
     };
 
@@ -112,12 +112,18 @@ app.controller('Marsupilami', function ($scope, $resource) {
                         alert("Votre nouveau compte a été créé avec succès ! Nous sommes heureux de vous accueillir ")
                     var tokenn = data.token;
                     $scope.token = data.token;
+                    if (data.token)
+                    {
+                        $scope.showLoginForm = false;
+                        $scope.showRegisterForm = false;
+                    }
 
                     $scope.getuser(data.token);
                 },
                 function (error) {
-                    console.log("error");
                 });
+
+
     };
 
     $scope.search = function (token) {
@@ -136,14 +142,14 @@ app.controller('Marsupilami', function ($scope, $resource) {
             'keyword': $scope.keyword
         },
         function (data) {
-            console.log(data);
             if (data.users)
-                console.log(data);
-            $scope.searchFriends = data.users;
+                $scope.searchFriends = data.users;
         },
                 function (error) {
                 });
     };
+
+    $scope.editUser = {};
 
     $scope.getuser = function (token) {
         var token = "Bearer " + $scope.token;
@@ -161,10 +167,18 @@ app.controller('Marsupilami', function ($scope, $resource) {
             'keyword': $scope.keyword
         },
         function (data) {
-            console.log(data);
             $scope.users = data.users;
             $scope.user = data.user;
-            $scope.editUser = angular.copy($scope.user);
+
+
+            $scope.editUser.username = $scope.user.username;
+            $scope.editUser.age = $scope.user.age;
+            $scope.editUser.race = $scope.user.race;
+            $scope.editUser.nourriture = $scope.user.nourriture;
+            $scope.editUser.famille = $scope.user.famille;
+            $scope.editUser.email = $scope.user.email;
+            $scope.editUser.current_password = $scope.user.username;
+
             $scope.friends = data.user.friends;
         },
                 function (error) {
@@ -174,12 +188,8 @@ app.controller('Marsupilami', function ($scope, $resource) {
     $scope.updateUser = function (id)
     {
         var token = "Bearer " + $scope.token;
-        console.log("updateUser");
-        var url = "http://localhost/appartoo-back/web/app_dev.php/profile/" + $scope.editUser.id;
+        var url = "http://localhost/appartoo-back/web/app_dev.php/profile/" + $scope.user.id;
         formData = JSON.stringify($scope.editUser);
-        console.log(formData);
-        console.log($scope.editUser);
-
         var postaction = $resource(url, null, {
             'put': {
                 method: 'PUT',
@@ -190,14 +200,11 @@ app.controller('Marsupilami', function ($scope, $resource) {
             }
         });
         postaction.put(
-                
-              formData
-       
-        
-        ,
-        function (data) {
-            $scope.getuser();
-        },
+                formData
+                ,
+                function (data) {
+                    $scope.getuser();
+                },
                 function (error) {
                 });
     };
